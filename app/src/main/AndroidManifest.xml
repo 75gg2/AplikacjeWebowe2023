@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JavaAndroid">
         <activity
-            android:name=".SecondActivity"
+            android:name=".CameraActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

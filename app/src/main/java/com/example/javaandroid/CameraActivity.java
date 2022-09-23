@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
-public class SecondActivity extends AppCompatActivity {
+public class CameraActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +20,8 @@ public class SecondActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         Bundle bundle = getIntent().getExtras();
-        String data = bundle.getString("data").toString();
-        Log.d("xxx", data);
+//        String data = bundle.getString("data").toString();
+//        Log.d("xxx", data);
     }
 
     @Override
