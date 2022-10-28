@@ -1,18 +1,36 @@
 package com.example.javaandroid;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private LinearLayout camera;
@@ -24,22 +42,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         ActionBar b = getSupportActionBar();
         assert b != null;
         b.hide();
+//                Log.d("xxx", "klik");
+//                Log.e("xxx", "klik");
+//                Log.i("xxx", "klik");
+//                intent.putExtra("data","dane");
+
 
         camera = findViewById(R.id.bt1);
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Log.d("xxx", "klik");
-//                Log.e("xxx", "klik");
-//                Log.i("xxx", "klik");
-
-                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
-//                intent.putExtra("data","dane");
-                startActivity(intent);
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(intent, 200);
+                }
             }
         });
         albums = findViewById(R.id.bt2);
@@ -67,6 +86,45 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, 100);
+        checkPermission(Manifest.permission.CAMERA, 100);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 200) {
+            if (resultCode == RESULT_OK) {
+                Bundle extras = data.getExtras();
+                Bitmap b = (Bitmap) extras.get("data");
+                ImageView iv = new ImageView(MainActivity.this);
+                iv.setImageBitmap(b);
+                AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+                alert.setTitle("W którym folderze zapisać zdjęcie?");
+                String[] arr = AlbumsActivity.getMyFolders().toArray(new String[0]);
+                alert.setItems(arr, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");
+                        String d = df.format(new Date());
+                        String path = AlbumsActivity.getMyFolder().getPath() + d + ".jpg";
+                        FileOutputStream fs = null;
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        b.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                        byte[] byteArray = stream.toByteArray();
+                        try {
+                            fs = new FileOutputStream(path);
+                            fs.write(stream.toByteArray());
+                            fs.close();
+                        }catch  (Exception e){
+                            Log.e("ErrorC",e.toString());
+                            Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                alert.show();
+            }
+
+        }
     }
 
     @Override
@@ -94,4 +152,5 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Permission already granted", Toast.LENGTH_SHORT).show();
         }
     }
+
 }

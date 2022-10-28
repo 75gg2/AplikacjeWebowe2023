@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">JavaAndroid</string>
+    <string name="app_name">KamilApp</string>
     <string name="bt1_name">camera</string>
     <string name="bt2_name">albums</string>
     <string name="bt3_name">collage</string>

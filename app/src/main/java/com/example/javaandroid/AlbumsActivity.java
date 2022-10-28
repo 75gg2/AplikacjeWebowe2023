@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,12 +25,22 @@ import java.util.stream.Collectors;
 public class AlbumsActivity extends AppCompatActivity {
     File mainFolder;
     File myFolder;
-    private final String folderName = "Gargula";
+    private final static String folderName = "Gargula";
     Button addButton;
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private List<String> dirsNames(File folder) {
+    public static  List<String> getMyFolders(){
+        return dirsNames(AlbumsActivity.getMyFolder());
+    }
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static File getMyFolder(){
+        File mainFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        return new File(mainFolder, folderName);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private static List<String> dirsNames(File folder) {
         List<String> xd = Arrays.stream(folder.listFiles())
                 .filter(File::isDirectory)
                 .map(File::getName)
@@ -58,6 +69,7 @@ public class AlbumsActivity extends AppCompatActivity {
                         File f1 = new  File(myFolder, String.valueOf(input.getText()));
                         f1.mkdir();
                     }
+
                 });
                 alert.show();
 
