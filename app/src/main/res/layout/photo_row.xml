@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:id="@+id/PhotoRowText"
+        android:text="PhotoRowPlaceholder"
+        android:gravity="center"
+    />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="edit"
+        android:layout_weight="1"
+        android:id="@+id/PhotoRowEdit"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="show"
+        android:layout_weight="1"
+        android:id="@+id/PhotoRowShow"
+        />
+</LinearLayout>
