@@ -106,14 +106,14 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");
                         String d = df.format(new Date());
-                        String path = AlbumsActivity.getMyFolder().getPath() + d + ".jpg";
-                        FileOutputStream fs = null;
+                        String path = AlbumsActivity.getMyFolder().getPath() + "/"+  arr[which]+"/"+ d + ".jpg";
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
                         b.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                         byte[] byteArray = stream.toByteArray();
                         try {
+                            FileOutputStream fs = null;
                             fs = new FileOutputStream(path);
-                            fs.write(stream.toByteArray());
+                            fs.write(byteArray);
                             fs.close();
                         }catch  (Exception e){
                             Log.e("ErrorC",e.toString());
