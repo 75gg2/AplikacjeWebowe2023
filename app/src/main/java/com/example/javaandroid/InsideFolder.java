@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -32,22 +33,17 @@ public class InsideFolder extends AppCompatActivity {
             if(!file.isFile())
                 continue;
             ImageView img = new ImageView(InsideFolder.this);
-            linearLayout.addView(img);
             String imagepath = file.getPath();
             Bitmap bmp = betterImageDecode(imagepath);
             img.setImageBitmap(bmp);
+            img.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,600));
+            img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            linearLayout.addView(img);
         }
 
 
         TextView title = findViewById(R.id.InsideFolderText);
         title.setText(folderName);
-        File[] flist = folder.listFiles();
-        ArrayList<File> list = new ArrayList<File>(Arrays.asList(flist));
-        CustomArrayAdapter customArrayAdapter = new CustomArrayAdapter(InsideFolder.this,
-                R.layout.photo_row,
-                list);
-        ListView lv = findViewById(R.id.InsideFolderListView);
-        lv.setAdapter(customArrayAdapter);
     }
 
     private Bitmap betterImageDecode(String filePath) {

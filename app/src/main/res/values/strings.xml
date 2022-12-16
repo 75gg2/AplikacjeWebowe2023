@@ -4,4 +4,6 @@
     <string name="bt2_name">albums</string>
     <string name="bt3_name">collage</string>
     <string name="bt4_name">network</string>
+    <string name="bt5_name">"???"</string>
+    <string name="bt6_name">albums new</string>
 </resources>

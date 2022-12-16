@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout albums;
     private LinearLayout collage;
     private LinearLayout network;
+    private LinearLayout newAlbums;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AlbumsActivity.class);
+                intent.putExtra("next","oldAlbumsInside");
                 startActivity(intent);
             }
         });
@@ -82,6 +84,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CameraActivity.class);
+                startActivity(intent);
+            }
+        });
+        newAlbums = findViewById(R.id.bt6);
+        newAlbums.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AlbumsActivity.class);
+                intent.putExtra("next","newAlbumCustom");
                 startActivity(intent);
             }
         });
