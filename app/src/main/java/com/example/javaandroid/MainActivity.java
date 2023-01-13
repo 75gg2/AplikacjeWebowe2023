@@ -23,6 +23,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.amitshekhar.DebugDB;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -40,12 +42,22 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout newAlbums;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {Log.d("xxx", DebugDB.getAddressLog());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        View someView = findViewById(R.id.activityMainForBg);
+
+        // Find the root view
+        View root = someView.getRootView();
+
+        // Set the color
+        root.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
+
         ActionBar b = getSupportActionBar();
         assert b != null;
         b.hide();
+
 //                Log.d("xxx", "klik");
 //                Log.e("xxx", "klik");
 //                Log.i("xxx", "klik");
