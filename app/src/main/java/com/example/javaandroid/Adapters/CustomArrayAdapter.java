@@ -1,4 +1,4 @@
-package com.example.javaandroid;
+package com.example.javaandroid.Adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,14 +18,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
+import com.example.javaandroid.Structures.DatabaseManager;
+import com.example.javaandroid.Structures.Note;
+import com.example.javaandroid.R;
+
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CustomArrayAdapter extends ArrayAdapter {
     private ArrayList<File> _list;
     private Context _context;
     private int _resource;
+    private int code;
+
 
     public CustomArrayAdapter(@NonNull Context context, int resource, @NonNull List objects) {
         super(context, resource, objects);
@@ -84,13 +91,26 @@ public class CustomArrayAdapter extends ArrayAdapter {
 
                 AlertDialog.Builder alert = new AlertDialog.Builder(_context);
                 View editView = View.inflate(_context, R.layout.note_inputs_xml, null);
-                String[] colors = {"#DFFF00", "#FFBF00", "#FF7F50", "#DE3163", "#9FE2BF", "#40E0D0", "#6495ED", "#CCCCFF"};
+                String[] colors = Note.colors;
 
                 LinearLayout parentLayout = editView.findViewById(R.id.noteEditColors);
+
+                final int[] colorCode = {0};
+
+                EditText et = (EditText) editView.findViewById(R.id.NoteEditTitle);
+                et.setTextColor(Color.parseColor(colors[0]));
                 for (String color : colors) {
                     Button b = new Button(_context); // nowy Button
                     b.setLayoutParams(new LinearLayout.LayoutParams(100, 100)); //jego wielkość
                     b.setBackgroundColor(Color.parseColor(color)); // tło
+                    b.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            colorCode[0] = Arrays.asList(colors).indexOf(color);
+                            code = Arrays.asList(colors).indexOf(color);
+                            et.setTextColor(Color.parseColor(color));
+                        }
+                    });
                     parentLayout.addView(b); // dodanie do elementu nadrzędnego
                 }
 
@@ -100,19 +120,22 @@ public class CustomArrayAdapter extends ArrayAdapter {
                     public void onClick(DialogInterface dialogInterface, int i) {
                     }
                 });
+                EditText etxt = (EditText) editView.findViewById(R.id.noteEditText);
+
                 alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        EditText et = (EditText) editView.findViewById(R.id.NoteEditTitle);
-                        EditText etxt = (EditText) editView.findViewById(R.id.noteEditText);
                         DatabaseManager db = new DatabaseManager(
                                 _context, // activity z galerią zdjęć
                                 "NotatkiGargulaKamil.db", // nazwa bazy
                                 null,
                                 1 //wersja bazy, po zmianie schematu bazy należy ją zwiększyć
                         );
-                        db.insert(et.getText().toString(), etxt.getText().toString());
+                        db.insert(et.getText().toString(),
+                                etxt.getText().toString(),
+                                colorCode[0]
+                        );
                         db.close();
                     }
                 });
@@ -147,6 +170,8 @@ public class CustomArrayAdapter extends ArrayAdapter {
     public int getCount() {
         return _list.size();
     }
+
+
 }
 
 

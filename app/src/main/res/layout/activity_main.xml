@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/activityMainForBg"
-    tools:context=".MainActivity">
+    tools:context=".Activities.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -139,6 +139,8 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center"
+            android:text="notes"
+
             android:textSize="@dimen/menuButtonTextSize"
             />
     </LinearLayout>
@@ -159,8 +161,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:text="@string/bt6_name"
-            android:gravity="center"
+             android:gravity="center"
             android:textSize="@dimen/menuButtonTextSize"
             />
     </LinearLayout>

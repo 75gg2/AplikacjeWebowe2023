@@ -1,4 +1,4 @@
-package com.example.javaandroid;
+package com.example.javaandroid.Activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
@@ -16,6 +16,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import com.example.javaandroid.R;
 
 import java.io.File;
 import java.util.Arrays;

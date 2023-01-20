@@ -1,4 +1,4 @@
-package com.example.javaandroid;
+package com.example.javaandroid.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
+
+import com.example.javaandroid.R;
 
 public class CameraActivity extends AppCompatActivity {
 

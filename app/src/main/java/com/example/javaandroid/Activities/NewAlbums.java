@@ -1,4 +1,4 @@
-package com.example.javaandroid;
+package com.example.javaandroid.Activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.example.javaandroid.Adapters.CustomArrayAdapter;
+import com.example.javaandroid.R;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class NewAlbums extends AppCompatActivity {
 

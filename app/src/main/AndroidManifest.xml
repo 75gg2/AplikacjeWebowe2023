@@ -15,19 +15,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JavaAndroid">
         <activity
-            android:name=".NewAlbums"
+            android:name=".Activities.NotesActivity"
             android:exported="true" />
         <activity
-            android:name=".InsideFolder"
+            android:name=".Activities.NewAlbums"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.InsideFolder"
             android:exported="false" />
         <activity
-            android:name=".AlbumsActivity"
+            android:name=".Activities.AlbumsActivity"
             android:exported="true" />
         <activity
-            android:name=".CameraActivity"
+            android:name=".Activities.CameraActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
