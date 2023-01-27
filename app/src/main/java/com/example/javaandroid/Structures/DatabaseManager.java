@@ -10,9 +10,20 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.javaandroid.Activities.NotesActivity;
+
 import java.util.ArrayList;
 
 public class DatabaseManager extends SQLiteOpenHelper {
+
+    public DatabaseManager(@Nullable Context context) {
+        super(context,
+                "NotatkiGargulaKamil.db",
+                null,
+                3
+        );
+    }
+
     public DatabaseManager(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
@@ -29,7 +40,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public ArrayList<Note> getAll() {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<Note> notes = new ArrayList<>();
-        Cursor result = db.rawQuery("SELECT * FROM  tabela1", null);
+        Cursor result = db.rawQuery("SELECT * FROM notes", null);
 
         while (result.moveToNext()) {
             notes.add(
@@ -52,7 +63,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         contentValues.put("description", description);
         contentValues.put("color", colorCode);
 
-        db.insertOrThrow("tabela1", null, contentValues); // gdy insert się nie powiedzie, będzie błąd
+        db.insertOrThrow("notes", null, contentValues); // gdy insert się nie powiedzie, będzie błąd
         db.close();
         return true;
     }
@@ -60,12 +71,12 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE tabela1 (_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'title' TEXT, 'description' TEXT, 'colorCode' INT)");
+        sqLiteDatabase.execSQL("CREATE TABLE notes (_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'title' TEXT, 'description' TEXT, 'color' INT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS tabela1");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS notes");
         onCreate(sqLiteDatabase);
     }
 }

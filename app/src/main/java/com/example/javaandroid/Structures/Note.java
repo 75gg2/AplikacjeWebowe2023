@@ -1,5 +1,7 @@
 package com.example.javaandroid.Structures;
 
+import android.util.Log;
+
 public class Note {
     private String title;
     private String description;
@@ -24,6 +26,10 @@ public class Note {
 
     public String getColorCode() {
         return colorCode;
+    }
+
+    public String getColor() {
+        return colors[Integer.parseInt(getColorCode())];
     }
 
     public void setColorCode(String colorCode) {

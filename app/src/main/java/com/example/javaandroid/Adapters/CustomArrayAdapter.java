@@ -126,12 +126,7 @@ public class CustomArrayAdapter extends ArrayAdapter {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        DatabaseManager db = new DatabaseManager(
-                                _context, // activity z galerią zdjęć
-                                "NotatkiGargulaKamil.db", // nazwa bazy
-                                null,
-                                1 //wersja bazy, po zmianie schematu bazy należy ją zwiększyć
-                        );
+                        DatabaseManager db = new DatabaseManager(_context);
                         db.insert(et.getText().toString(),
                                 etxt.getText().toString(),
                                 colorCode[0]

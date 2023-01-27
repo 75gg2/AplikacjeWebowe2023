@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        network = findViewById(R.id.bt4);
+        network = findViewById(R.id.bt5);
         network.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
