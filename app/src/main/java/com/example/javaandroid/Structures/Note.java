@@ -27,9 +27,12 @@ public class Note {
     public String getColorCode() {
         return colorCode;
     }
+    public int getColorCodeInt() {
+        return Integer.parseInt(getColorCode());
+    }
 
     public String getColor() {
-        return colors[Integer.parseInt(getColorCode())];
+        return colors[getColorCodeInt()];
     }
 
     public void setColorCode(String colorCode) {

@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         View someView = findViewById(R.id.activityMainForBg);
-
+        
         // Find the root view
         View root = someView.getRootView();
 

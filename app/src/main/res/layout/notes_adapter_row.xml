@@ -3,13 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
-
     <ImageView
         android:id="@+id/NotesAdapterEditButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="2"
-        android:src="@drawable/albums"
+        android:src="@drawable/ic_baseline_edit_24"
         />
 
     <LinearLayout
