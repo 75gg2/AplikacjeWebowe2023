@@ -47,7 +47,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
                     new Note(
                             result.getString(result.getColumnIndex("title")),
                             result.getString(result.getColumnIndex("description")),
-                            result.getString(result.getColumnIndex("color"))
+                            result.getString(result.getColumnIndex("color")),
+                            result.getString(result.getColumnIndex("_id"))
                     )
             );
         }
@@ -55,6 +56,23 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     }
 
+    public boolean update(String id, String title, String description, int colorCode) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("title", title);
+        contentValues.put("description", description);
+        contentValues.put("color", colorCode);
+
+        db.update("notes", contentValues, "_id = ?", new String[]{id});
+        db.close();
+        return true;
+    }
+
+    public void delete(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("notes","_id = ?",new String[]{id});
+        db.close();
+    }
     public boolean insert(String title, String description, int colorCode) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -79,4 +97,5 @@ public class DatabaseManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS notes");
         onCreate(sqLiteDatabase);
     }
+
 }

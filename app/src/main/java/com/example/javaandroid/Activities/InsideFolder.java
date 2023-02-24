@@ -3,10 +3,12 @@ package com.example.javaandroid.Activities;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,6 +40,15 @@ public class InsideFolder extends AppCompatActivity {
             img.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,600));
             img.setScaleType(ImageView.ScaleType.CENTER_CROP);
             linearLayout.addView(img);
+
+            img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(InsideFolder.this, Photo.class);
+                    intent.putExtra("img", imagepath);
+                    startActivity(intent);
+                }
+            });
         }
 
 
@@ -45,7 +56,7 @@ public class InsideFolder extends AppCompatActivity {
         title.setText(folderName);
     }
 
-    private Bitmap betterImageDecode(String filePath) {
+    public static Bitmap betterImageDecode(String filePath) {
         Bitmap myBitmap;
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 4;

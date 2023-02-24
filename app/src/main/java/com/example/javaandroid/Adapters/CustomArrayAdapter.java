@@ -2,6 +2,7 @@ package com.example.javaandroid.Adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.util.Log;
@@ -18,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
+import com.example.javaandroid.Activities.Photo;
 import com.example.javaandroid.Structures.DatabaseManager;
 import com.example.javaandroid.Structures.Note;
 import com.example.javaandroid.R;

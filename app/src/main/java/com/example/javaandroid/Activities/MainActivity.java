@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.amitshekhar.DebugDB;
+import com.example.javaandroid.CollageActivity;
 import com.example.javaandroid.R;
 
 import java.io.ByteArrayOutputStream;
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         collage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
+                Intent intent = new Intent(MainActivity.this, CollageActivity.class);
                 startActivity(intent);
             }
         });
@@ -115,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
         });
         checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, 100);
         checkPermission(Manifest.permission.CAMERA, 100);
+        checkPermission(Manifest.permission.ACCESS_NETWORK_STATE, 100);
+        checkPermission(Manifest.permission.INTERNET, 100);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -176,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
     public void checkPermission(String permission, int requestCode) {
         if (ContextCompat.checkSelfPermission(MainActivity.this, permission) == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(MainActivity.this, new String[]{permission}, requestCode);
+            Toast.makeText(MainActivity.this, "Permission not granted", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(MainActivity.this, "Permission already granted", Toast.LENGTH_SHORT).show();
         }

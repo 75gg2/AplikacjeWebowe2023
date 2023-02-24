@@ -9,7 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,9 +21,11 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.javaandroid.R;
+import com.example.javaandroid.Structures.DatabaseManager;
 import com.example.javaandroid.Structures.Note;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -77,26 +82,82 @@ public class NotesAdapter extends ArrayAdapter {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         switch (i) {
                             case 0:
+                                AlertDialog.Builder alert = new AlertDialog.Builder(_context);
+                                View editView = View.inflate(_context, R.layout.note_inputs_xml, null);
+                                String[] colors = Note.colors;
+
+                                LinearLayout parentLayout = editView.findViewById(R.id.noteEditColors);
+
+                                final int[] colorCode = {n.getColorCodeInt()};
+
+                                EditText et = (EditText) editView.findViewById(R.id.NoteEditTitle);
+                                et.setTextColor(Color.parseColor(colors[colorCode[0]]));
+                                et.setText(n.getTitle());
+                                for (String color : colors) {
+                                    Button b = new Button(_context); // nowy Button
+                                    b.setLayoutParams(new LinearLayout.LayoutParams(100, 100)); //jego wielkość
+                                    b.setBackgroundColor(Color.parseColor(color)); // tło
+                                    b.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            colorCode[0] = Arrays.asList(colors).indexOf(color);
+//                                            int code = Arrays.asList(colors).indexOf(color);
+                                            et.setTextColor(Color.parseColor(color));
+                                        }
+                                    });
+                                    parentLayout.addView(b); // dodanie do elementu nadrzędnego
+                                }
+
+                                alert.setView(editView);
+                                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                    }
+                                });
+                                EditText etxt = (EditText) editView.findViewById(R.id.noteEditText);
+                                etxt.setText(n.getDescription());
+
+                                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                        DatabaseManager db = new DatabaseManager(_context);
+                                        db.update(
+                                                n.getId(),
+                                                et.getText().toString(),
+                                                etxt.getText().toString(),
+                                                colorCode[0]
+                                        );
+                                        db.close();
+
+                                        n.setTitle(et.getText().toString());
+                                        n.setDescription(etxt.getText().toString());
+                                        n.setColorCode(String.valueOf(colorCode[0]));
+                                        notifyDataSetChanged();
+                                    }
+                                });
+                                alert.show();
                                 break;
                             case 1:
+                                DatabaseManager db = new DatabaseManager(_context);
+                                db.delete(n.getId());
+                                db.close();
+                                _list.remove(n);
                                 break;
                             case 2:
                                 _list = new ArrayList(_list.stream()
                                         .sorted((a, b) -> a.getTitle().compareTo(b.getTitle()))
                                         .collect(Collectors.toList()));
-                                notifyDataSetChanged();
                                 break;
                             case 3:
                                 _list = new ArrayList(_list.stream()
                                         .sorted((a, b) -> a.getColorCodeInt() - b.getColorCodeInt())
                                         .collect(Collectors.toList()));
-
-                                notifyDataSetChanged();
-                                NotesAdapter.super.notifyDataSetChanged();
-
                                 break;
 
                         }
+
+                        notifyDataSetChanged();
                     }
                 });
                 dialog.show();
