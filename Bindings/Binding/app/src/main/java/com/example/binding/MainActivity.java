@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        activityMainBinding.button.setOnClickListener(v->{
+        activityMainBinding.b1.setOnClickListener(v->{
             Intent intent = new Intent(MainActivity.this, SecondScreeen.class);
             intent.putExtra("num",activityMainBinding.et.getText());
             startActivity(intent);
