@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<data>
+    <import type="android.widget.Toast"/>
+    <variable
+        name="str"
+        type="com.example.l04.TestStr" />
+</data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@{ItemView"
+            android:selectedItemPosition="@={str.str}"
+            android:onItemSelected="@{()->Toast.makeText(context,`zmiana na`+str.str,Toast.LENGTH_SHORT).show()}"
+            tools:listitem="@layout/support_simple_spinner_dropdown_item" />
+
+    </LinearLayout>
+</layout>
