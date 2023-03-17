@@ -9,8 +9,48 @@
 
     <Button
         android:layout_width="match_parent"
-        android:text="call api"
-        android:id="@+id/btn"
+        android:text="GET POSTS"
+        android:id="@+id/btn1"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:layout_width="match_parent"
+        android:text="GET POST/3/COMMENTS"
+        android:id="@+id/btn2"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:layout_width="match_parent"
+        android:text="GET /POSTS/?UID=4"
+        android:id="@+id/btn3"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:layout_width="match_parent"
+        android:text="GET POSTS WITH PARAMS MAP"
+        android:id="@+id/btn4"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:layout_width="match_parent"
+        android:text="POST1"
+        android:id="@+id/btn5"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:layout_width="match_parent"
+        android:text="POST2"
+        android:id="@+id/btn6"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:layout_width="match_parent"
+        android:text="PUT"
+        android:id="@+id/btn7"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:layout_width="match_parent"
+        android:text="PATCH"
+        android:id="@+id/btn8"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:layout_width="match_parent"
+        android:text="DELETE"
+        android:id="@+id/btn9"
         android:layout_height="wrap_content"/>
     <TextView
         android:id="@+id/tv"
