@@ -22,6 +22,11 @@
             android:id="@+id/takePhoto"
             android:layout_height="wrap_content"
             android:text="take photo"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:id="@+id/takeVideo"
+            android:layout_height="wrap_content"
+            android:text="record Video"/>
     </LinearLayout>
 
 </RelativeLayout>
